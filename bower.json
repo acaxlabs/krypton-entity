@@ -1,0 +1,14 @@
+{
+  "name": "krypton-entity",
+  "description": "Polymer web component for ASP .Net Web API's",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

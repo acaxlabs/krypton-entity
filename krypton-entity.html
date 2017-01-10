@@ -1,0 +1,81 @@
+﻿<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-ajax/iron-ajax.html" />
+<dom-module id="krypton-entity">
+    <template>
+        <iron-ajax id="ajax"
+                   handle-as="json"
+                   on-response="_onResponse"
+                   content-type="application/json">
+        </iron-ajax>
+    </template>
+    <script>
+        Polymer({
+            is: "krypton-entity",
+            properties: {
+                key: { type: String, notify: true, },
+                item: { type: Object, notify: true, },
+                modelName: { type: String, notify: true},
+                getUrl: { type: String },
+                createUrl: { type: String },
+                updateUrl: { type: String },
+                deleteUrl: { type: String },
+                baseUrl: { type: String, value: "/api/"},
+            },
+            observers:[
+                "_modelNameChanged(modelName, baseUrl)",
+            ],
+            _onResponse: function (e) {
+                switch (e.target.method) {
+                    case "GET":
+                        this.fire("krypton-get", this.item);
+                        console.log(e)
+                        this.set("item", e.detail.response)
+                        break;
+                    case "POST":
+                        this.fire("krypton-create", this.item);
+                        this.set("item", e.detail.response)
+                        break;
+                    case "PUT":
+                        this.fire("krypton-update", this.item);
+                        this.set("item", e.detail.response)
+                        break;
+                    case "DELETE":
+                        this.fire("krypton-delete", this.item);
+                        this.set("item", e.detail.response)
+                        break;
+                }
+            },
+            _modelNameChanged: function (modelName, baseUrl) {
+                if (!this.getUrl) this.getUrl = baseUrl + modelName + "/";
+                if (!this.createUrl) this.createUrl = baseUrl + modelName + "/";
+                if (!this.updateUrl) this.updateUrl = baseUrl + modelName + "/";
+                if (!this.deleteUrl) this.deleteUrl = baseUrl + modelName + "/";
+            },
+
+            getItem: function () {
+                this.$.ajax.method = "GET";
+                this.$.ajax.url = this.getUrl + this.key
+                this.$.ajax.body = null;
+                this.$.ajax.generateRequest();
+            },
+            createItem: function () {
+                this.$.ajax.method = "POST";
+                this.$.ajax.url = this.createUrl;
+                this.$.ajax.body = this.item;
+                this.$.ajax.generateRequest();
+            },
+            updateItem: function () {
+                this.$.ajax.method = "PUT";
+                this.$.ajax.url = this.updateUrl + this.key;
+                this.$.ajax.body = this.item;
+                this.$.ajax.generateRequest();
+            },
+            deleteItem: function () {
+                this.$.ajax.method = "DELETE";
+                this.$.ajax.url = this.deleteUrl + this.key;
+                this.$.ajax.body = null;
+                this.$.ajax.generateRequest();
+            },
+        })
+    </script>
+</dom-module>
