@@ -1,14 +1,21 @@
+
 {
   "name": "krypton-entity",
-  "description": "Polymer web component for ASP .Net Web API's",
+  "authors": [
+    "Tyler Shaw <tylerjacobshaw@gmail.com>"
+  ],
+  "description": "Give full crud to a single entity type for asp .net web apis.",
   "main": "",
   "license": "MIT",
   "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+  "ignore": [],
+  "dependencies": {
+    "paper-button": "polymerelements/paper-button#^1.0.0",
+    "paper-input": "polymerelements/paper-input#^1.0.0",
+    "iron-ajax": "polymerelements/iron-ajax#^1.0.0",
+    "polymer": "Polymer/polymer#^1.1.0"
+  },
+   "devDependencies": {
+        "iron-component-page": "polymerelements/iron-component-page#^1.0.0"
+    }
 }
