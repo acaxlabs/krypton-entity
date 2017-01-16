@@ -22,7 +22,7 @@
             properties: {
                 /*The id of the entity your looking for*/
                 key: { type: String, notify: true, },
-                /*Two way binding property. `_onResponse` will set the `item`property to the detail on the response object. You may also bind to this property with a new item such as in the example: `<krypton-entity id="krypton" key="{{id}}" model-name="Cars" item="{{`cars`}}">`  <span style="color:red">`cars`</span> is the item being sent in the `createItem()` request.*/
+                /*Two way binding property. `_onResponse` will set the `item` property to the detail on the response object. You may also bind to this property with a new item such as in the example: `<krypton-entity id="krypton" key="{{id}}" model-name="Cars" item="{{cars}}">`  <span style="color:red">`cars`</span> is the item being sent in the `createItem()` request.*/
                 item: { type: Object, notify: true, value: {} },
                 /*<span style="color:red">`/api/modelName`</span>, Example: api/Cars */
                 modelName: { type: String, notify: true },
