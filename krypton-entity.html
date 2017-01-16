@@ -23,7 +23,7 @@
                 /*The id of the entity your looking for*/
                 key: { type: String, notify: true, },
                 /*Two way binding property. `_onResponse` will set the `item`property to the detail on the response object. You may also bind to this property with a new item such as in the example: `<krypton-entity id="krypton" key="{{id}}" model-name="Cars" item="{{`cars`}}">`  <span style="color:red">`cars`</span> is the item being sent in the `createItem()` request.*/
-                item: { type: Object, notify: true, },
+                item: { type: Object, notify: true, value: {} },
                 /*<span style="color:red">`/api/modelName`</span>, Example: api/Cars */
                 modelName: { type: String, notify: true },
                 /*Set your own GET request to an open API*/
@@ -50,21 +50,20 @@
             _onResponse: function (e) {
                 switch (e.target.method) {
                     case "GET":
+                        this.set("item", e.detail.response);
                         this.fire("krypton-get", this.item);
-                        console.log(e)
-                        this.set("item", e.detail.response)
                         break;
                     case "POST":
+                        this.set("item", e.detail.response);
                         this.fire("krypton-create", this.item);
-                        this.set("item", e.detail.response)
                         break;
                     case "PUT":
+                        this.set("item", e.detail.response);
                         this.fire("krypton-update", this.item);
-                        this.set("item", e.detail.response)
                         break;
                     case "DELETE":
+                        this.set("item", e.detail.response);
                         this.fire("krypton-delete", this.item);
-                        this.set("item", e.detail.response)
                         break;
                 }
             },

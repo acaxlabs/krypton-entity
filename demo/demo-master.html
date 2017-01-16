@@ -4,28 +4,22 @@
 <link rel="import" href="../../paper-input/paper-input.html" />
 <dom-module id="demo-master">
     <template>
-        <krypton-entity id="krypton" key="5" model-name="Cars" item="{{item}}"></krypton-entity>
-        {{item.Id}}
-        {{item.Year}}
-        {{item.Make}}
-        {{item.Model}}
+        <krypton-entity id="krypton" key="5" base-url="https://jsonplaceholder.typicode.com/" model-name="posts" item="{{entityList}}"></krypton-entity>
+        {{entityList.title}}
+        {{entityList.body}}
         <div hidden$="{{!editValue}}">
             <h1>Edit Form</h1>
-            <paper-input value="{{item.Id}}"></paper-input>
-            <paper-input value="{{item.Year}}"></paper-input>
-            <paper-input value="{{item.Make}}"></paper-input>
-            <paper-input value="{{item.Model}}"></paper-input>
+            <paper-input value="{{entityList.title}}"></paper-input>
+            <paper-input value="{{entityList.body}}"></paper-input>
             <paper-button on-click="saveItem">Save Changes</paper-button>
         </div>
         <div hidden$="{{!createStuff}}">
             <h1>Create Form</h1>
-            <paper-input value="{{item.Id}}"></paper-input>
-            <paper-input value="{{item.Year}}"></paper-input>
-            <paper-input value="{{item.Make}}"></paper-input>
-            <paper-input value="{{item.Model}}"></paper-input>
+            <paper-input value="{{entityList.title}}"></paper-input>
+            <paper-input value="{{entityList.body}}"></paper-input>
             <paper-button on-click="createItem">Save</paper-button>
         </div>
-        <paper-button on-click="runFunction">Click</paper-button>
+        <paper-button on-click="runFunction">GET</paper-button>
 
         <paper-button on-click="updateItem">Edit</paper-button>
 
@@ -37,7 +31,7 @@
         Polymer({
             is: "demo-master",
             properties:{
-                item: { type: Object, notify: true },
+                entityList: { type: Object, notify: true },
                 editValue: { type: Boolean, notify: true, value: false },
                 createStuff: { type: Boolean, notify: true, value: false }
             },
