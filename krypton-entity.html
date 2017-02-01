@@ -1,4 +1,4 @@
-﻿<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../polymer/polymer.html" />
 <link rel="import" href="../iron-ajax/iron-ajax.html" />
 <dom-module id="krypton-entity">
     <!--
@@ -10,10 +10,11 @@
     @element krypton-entity
     -->
     <template>
-        <iron-ajax id="ajax"
-                   handle-as="json"
-                   on-response="_onResponse"
-                   content-type="application/json">
+        <iron-ajax 
+            id="ajax"
+            handle-as="json"
+            on-response="_onResponse"
+            content-type="application/json">
         </iron-ajax>
     </template>
     <script>
@@ -21,7 +22,7 @@
             is: "krypton-entity",
             properties: {
                 /*The id of the entity your looking for*/
-                key: { type: String, notify: true, },
+                key: { type: String, notify: true },
                 /*Two way binding property. `_onResponse` will set the `item` property to the detail on the response object. You may also bind to this property with a new item such as in the example: `<krypton-entity id="krypton" key="{{id}}" model-name="Cars" item="{{cars}}">`  <span style="color:red">`cars`</span> is the item being sent in the `createItem()` request.*/
                 item: { type: Object, notify: true, value: {} },
                 /*<span style="color:red">`/api/modelName`</span>, Example: api/Cars */
@@ -35,12 +36,18 @@
                 /*Set your own DELETE request to an open API*/
                 deleteUrl: { type: String },
                 /*Define your url with this attribute. Other wise it uses the current url in the browser.*/
-                baseUrl: { type: String, value: "/api/"},
+                baseUrl: { type: String },
             },
             /*Runs the _modelNameChanged function when both the modelname and baseUrl attributes are set. */
             observers:[
                 "_modelNameChanged(modelName, baseUrl)",
             ],
+            /* loads base url if available */
+            ready: function() {
+                if(this.baseUrl == undefined && window.baseUrl != undefined) {
+                    this.baseUrl = window.baseUrl;
+                }
+            },
             /*Looks at the method within the request. Then fires a javascript event in the bower.The event names and there HTTP verbs are as follows:<br/>
             GET: krypton-get <br/>
             POST: krypton-create <br/>
