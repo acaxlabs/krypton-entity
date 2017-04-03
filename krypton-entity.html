@@ -78,7 +78,12 @@
                     case "DELETE":
                         this.set("item", e.detail.response);
                         this.fire("krypton-delete", this.item);
+                        console.log(e.detail);
                         break;
+                }
+                var eventName = e.detail.root.getAttribute("krypton-event-name");
+                if (eventName) {
+                    this.fire(eventName, e.detail.response);
                 }
             },
             /*Sets up the url if <`baseUrl`> and <`modelName`> are defined*/
@@ -103,18 +108,24 @@
                 this.$.ajax.generateRequest();
             },
             /*PUT request with the Id of entity you're looking for.*/
-            updateItem: function () {
+            updateItem: function (eventName) {
                 this.$.ajax.method = "PUT";
                 this.$.ajax.url = this.updateUrl + this.key;
                 this.$.ajax.body = this.item;
-                this.$.ajax.generateRequest();
+                var req = this.$.ajax.generateRequest();
+                if (eventName) {
+                    req.setAttribute("krypton-event-name", eventName);
+                }
             },
             /*DELETE request with the Id of entity you're looking for.*/
-            deleteItem: function () {
+            deleteItem: function (eventName) {
                 this.$.ajax.method = "DELETE";
                 this.$.ajax.url = this.deleteUrl + this.key;
                 this.$.ajax.body = null;
-                this.$.ajax.generateRequest();
+                var req = this.$.ajax.generateRequest();
+                if (eventName) {
+                    req.setAttribute("krypton-event-name", eventName);
+                }
             },
         })
     </script>
