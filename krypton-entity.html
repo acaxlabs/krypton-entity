@@ -94,18 +94,24 @@
                 if (!this.deleteUrl) this.deleteUrl = baseUrl + modelName + "/";
             },
             /*GET request with the Id of entity you're looking for.*/
-            getItem: function () {
+            getItem: function (eventName) {
                 this.$.ajax.method = "GET";
                 this.$.ajax.url = this.getUrl + this.key;
                 this.$.ajax.body = null;
-                this.$.ajax.generateRequest();
+                var req = this.$.ajax.generateRequest();
+                if (eventName) {
+                    req.setAttribute("krypton-event-name", eventName);
+                }
             },
             /*POST request with a new entityType.*/
-            createItem: function () {
+            createItem: function (eventName) {
                 this.$.ajax.method = "POST";
                 this.$.ajax.url = this.createUrl;
                 this.$.ajax.body = this.item;
-                this.$.ajax.generateRequest();
+                var req = this.$.ajax.generateRequest();
+                if (eventName) {
+                    req.setAttribute("krypton-event-name", eventName);
+                }
             },
             /*PUT request with the Id of entity you're looking for.*/
             updateItem: function (eventName) {
@@ -130,3 +136,4 @@
         })
     </script>
 </dom-module>
+
