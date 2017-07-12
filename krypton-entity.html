@@ -14,7 +14,8 @@
             id="ajax"
             handle-as="json"
             on-response="_onResponse"
-            content-type="application/json">
+            content-type="application/json"
+            loading={{loading}}">
         </iron-ajax>
     </template>
     <script>
@@ -38,7 +39,9 @@
                 /*Define your url with this attribute. Other wise it uses the current url in the browser.*/
                 baseUrl: { type: String, notify: true },
                 /*Disable to prevent entity from auto-fetching when key is set*/
-                auto: { type: Boolean, value:true }
+                auto: { type: Boolean, value:true },
+                /*Flag to indicate if a request is in flight*/                         
+                loading: { type: Boolean, notify: true, value: false },                         
             },
             /*Runs the _modelNameChanged function when both the modelname and baseUrl attributes are set. */
             observers:[
