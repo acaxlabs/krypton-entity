@@ -64,7 +64,7 @@
             DELETE: krypton-delete. 
             */
             _onResponse: function (e) {
-                console.log("response", e.detail.response);
+                //console.log("response", e.detail.response);
                 switch (e.target.method) {
                     case "GET":
                         this.set("item", e.detail.response);
@@ -81,7 +81,7 @@
                     case "DELETE":
                         this.set("item", e.detail.response);
                         this.fire("krypton-delete", this.item);
-                        console.log(e.detail);
+                        //console.log(e.detail);
                         break;
                 }
                 var eventName = e.detail.root.getAttribute("krypton-event-name");
