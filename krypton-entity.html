@@ -15,6 +15,7 @@
             handle-as="json"
             on-response="_onResponse"
             content-type="application/json"
+            last-error="{{error}}"
             loading="{{loading}}">
         </iron-ajax>
     </template>
@@ -46,7 +47,8 @@
             /*Runs the _modelNameChanged function when both the modelname and baseUrl attributes are set. */
             observers:[
                 "_modelNameChanged(modelName, baseUrl)",
-                "_autoLoad(key, modelName, baseUrl)"
+                "_autoLoad(key, modelName, baseUrl)",
+                "_onError(error)",
             ],
             /* loads base url if available */
             ready: function() {
@@ -136,6 +138,9 @@
                     req.setAttribute("krypton-event-name", eventName);
                 }
             },
+            _onError: function (error) {
+                this.fire("krypton-entity-error", error);
+            }
         })
     </script>
 </dom-module>
