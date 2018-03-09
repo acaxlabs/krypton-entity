@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html" />
-<link rel="import" href="../iron-ajax/iron-ajax.html" />
+<link rel="import" href="../krypton-ajax/krypton-ajax.html" />
 <dom-module id="krypton-entity">
     <!--
     `<krypton-entity>` provides simple create, read, update and delete actions to a single entity winthin the .Net Web API framework.
@@ -10,14 +10,14 @@
     @element krypton-entity
     -->
     <template>
-        <iron-ajax 
+        <krypton-ajax 
             id="ajax"
             handle-as="json"
             on-response="_onResponse"
             content-type="application/json"
             last-error="{{error}}"
             loading="{{loading}}">
-        </iron-ajax>
+        </krypton-ajax>
     </template>
     <script>
         Polymer({
